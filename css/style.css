@@ -588,7 +588,12 @@ address{
 
 #contact .error { color: #c59a6d; }
 
-.form-space{ padding-bottom: 10px; }
+.form-space { padding-bottom: 10px; }
+.spinner-center { vertical-align: middle; }
+.email-result {
+  display: inline;
+  color: #c59a6d;
+}
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color:    #222222;

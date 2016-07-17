@@ -374,15 +374,17 @@
 
                 <div class="col-md-9" ng-controller="formController">
                     <form autocomplete="off">
-                      <input type="text" class="form-control" placeholder="Email" ng-model="email">
+                      <input type="text" class="form-control" placeholder="Email" ng-model="email" ng-disabled="processing">
                       <p class="error" ng-hide="emailCheck"> {{emailError}} </p>
-                      <input type="text" class="form-control" placeholder="Subject" ng-model="subject">
+                      <input type="text" class="form-control" placeholder="Subject" ng-model="subject" ng-disabled="processing">
                       <p class="error" ng-hide="subjectCheck"> This is a required field </p>
-                      <textarea class="form-control" rows="4" placeholder="Message" ng-model="message"></textarea>
+                      <textarea class="form-control" rows="4" placeholder="Message" ng-model="message" ng-disabled="processing"></textarea>
                       <p class="error" ng-hide="messageCheck"> This is a required field </p>
                       <div class="form-space"></div>
                       <div class="text-right">
-                          <input type="Submit" class="btn send-btn" value="Send" ng-click="checkForm()"/>
+                          <p ng-show="showResult" class="email-result"> {{result}} </p>
+                          <i class="fa fa-spinner fa-2x fa-spin spinner-center" ng-show="showSpinner"></i> &nbsp
+                          <input type="Submit" class="btn send-btn" value="Send" ng-click="checkForm()" ng-disabled="processing"/>
                       </div>
                     </form>
                 </div>

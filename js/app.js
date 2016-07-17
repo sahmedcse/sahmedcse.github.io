@@ -1,12 +1,16 @@
 var app = angular.module("portfolio", []);
 
-app.controller("formController", function($scope, $http) {
+app.controller("formController", function($scope, $http, $timeout) {
         $scope.emailCheck = true;
         $scope.subjectCheck = true;
         $scope.messageCheck = true;
         $scope.emailError = "";
+        $scope.showSpinner = false;
+        $scope.showResult = false;
+        $scope.processing = false;
 
         $scope.checkForm = function() {
+          $scope.processing = true;
           if(textChecker($scope.email) || emptyChecker($scope.email)) {
             $scope.emailError = "This is a required field";
             $scope.emailCheck = textChecker($scope.email) && emptyChecker($scope.email);
@@ -23,10 +27,11 @@ app.controller("formController", function($scope, $http) {
             data.subject = $scope.subject;
             data.emailContent = $scope.message;
             data = JSON.stringify(data);
-
+            $scope.showSpinner = true;
             $scope.sendEmail(data);
+          }else {
+            $scope.processing = true;
           }
-
         }
 
         $scope.sendEmail = function(data) {
@@ -34,14 +39,39 @@ app.controller("formController", function($scope, $http) {
             method : "POST",
             data : data,
             url : "https://emailapp.herokuapp.com/email"
-          }).then(function mySucces(response) {
-            $scope.email = null;
-            $scope.subject = null;
-            $scope.message = null;
-          }, function myError(response) {
-            $scope.email = null;
-            $scope.subject = null;
-            $scope.message = null;
+          }).then(function callSucces(response) {
+            $scope.showResult = false;
+            $scope.result = "Email successfully sent"
+
+            $timeout(function () {
+              $scope.showSpinner = false;
+              $scope.showResult = true;
+            }, 3000).then(function () {
+              $timeout(function () {
+                $scope.email = null;
+                $scope.subject = null;
+                $scope.message = null;
+                $scope.showResult = false;
+                $scope.processing = false;
+              }, 1000);
+            });
+
+          }, function callError(response) {
+            $scope.showResult = false;
+            $scope.result = "Email could not be sent"
+
+            $timeout(function () {
+              $scope.showSpinner = false;
+              $scope.showResult = true;
+            }, 3000).then(function () {
+              $timeout(function () {
+                $scope.email = null;
+                $scope.subject = null;
+                $scope.message = null;
+                $scope.showResult = false;
+                $scope.processing = false;
+              }, 1000);
+            });
           });
         }
 });
