@@ -30,7 +30,7 @@ app.controller("formController", function($scope, $http, $timeout) {
             $scope.showSpinner = true;
             $scope.sendEmail(data);
           }else {
-            $scope.processing = true;
+            $scope.processing = false;
           }
         }
 
