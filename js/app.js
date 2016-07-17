@@ -35,9 +35,13 @@ app.controller("formController", function($scope, $http) {
             data : data,
             url : "https://emailapp.herokuapp.com/email"
           }).then(function mySucces(response) {
-            console.log("SUCCESS" + response.statusCode);
+            $scope.email = null;
+            $scope.subject = null;
+            $scope.message = null;
           }, function myError(response) {
-            console.log("ERROR " + response.statusCode);
+            $scope.email = null;
+            $scope.subject = null;
+            $scope.message = null;
           });
         }
 });
