@@ -89,6 +89,7 @@ a:focus{
 	border-radius: 0;
 	padding: 10px 30px;
 	height: 100px;
+  cursor: default;
 }
 .header-text.btn:hover{
 	color: inherit;
@@ -131,18 +132,6 @@ span.typed-cursor {
 	top: -5px;
 	position: relative;
 }
-/*.header-text{
-	margin-top: 20px;
-	position: absolute;
-	border: 1px solid #ffffff;
-	left: 25%;
-	right: 25%;
-}
-.header-text h1{
-	padding: 20px;
-	position: relative;
-	margin: 0 auto;
-}*/
 nav#menu span.fa.fa-bars{
 	font-size: 30px;
 	position: fixed;
@@ -273,7 +262,6 @@ a.down-btn span.fa.fa-angle-down {
 	border-color: #c59a6d;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	cursor: pointer;
 	padding-top: 80px;
 	padding-bottom: 80px;
 }
